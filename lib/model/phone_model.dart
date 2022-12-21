@@ -1,90 +1,183 @@
 class PhoneModel {
-  PhoneModel({
-    this.homeStore,
-    this.bestSeller,
-  });
+  List<HomeStore>? _homeStore;
+  List<BestSeller>? _bestSeller;
 
-  List<HomeStore>? homeStore;
-  List<BestSeller>? bestSeller;
+  PhoneModel({List<HomeStore>? homeStore, List<BestSeller>? bestSeller}) {
+    if (homeStore != null) {
+      this._homeStore = homeStore;
+    }
+    if (bestSeller != null) {
+      this._bestSeller = bestSeller;
+    }
+  }
 
-  factory PhoneModel.fromJson(Map<String, dynamic> json) => PhoneModel(
-        homeStore: List<HomeStore>.from(
-            json["home_store"].map((x) => HomeStore.fromJson(x))),
-        bestSeller: List<BestSeller>.from(
-            json["best_seller"].map((x) => BestSeller.fromJson(x))),
-      );
-}
+  List<HomeStore>? get homeStore => _homeStore;
+  set homeStore(List<HomeStore>? homeStore) => _homeStore = homeStore;
+  List<BestSeller>? get bestSeller => _bestSeller;
+  set bestSeller(List<BestSeller>? bestSeller) => _bestSeller = bestSeller;
 
-class BestSeller {
-  BestSeller({
-    this.id,
-    this.isFavorites,
-    this.title,
-    this.priceWithoutDiscount,
-    this.discountPrice,
-    this.picture,
-  });
+  PhoneModel.fromJson(Map<String, dynamic> json) {
+    if (json['home_store'] != null) {
+      _homeStore = <HomeStore>[];
+      json['home_store'].forEach((v) {
+        _homeStore!.add(new HomeStore.fromJson(v));
+      });
+    }
+    if (json['best_seller'] != null) {
+      _bestSeller = <BestSeller>[];
+      json['best_seller'].forEach((v) {
+        _bestSeller!.add(new BestSeller.fromJson(v));
+      });
+    }
+  }
 
-  int? id;
-  bool? isFavorites;
-  String? title;
-  int? priceWithoutDiscount;
-  int? discountPrice;
-  String? picture;
-
-  factory BestSeller.fromJson(Map<String, dynamic> json) => BestSeller(
-        id: json["id"],
-        isFavorites: json["is_favorites"],
-        title: json["title"],
-        priceWithoutDiscount: json["price_without_discount"],
-        discountPrice: json["discount_price"],
-        picture: json["picture"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "is_favorites": isFavorites,
-        "title": title,
-        "price_without_discount": priceWithoutDiscount,
-        "discount_price": discountPrice,
-        "picture": picture,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this._homeStore != null) {
+      data['home_store'] = this._homeStore!.map((v) => v.toJson()).toList();
+    }
+    if (this._bestSeller != null) {
+      data['best_seller'] = this._bestSeller!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
 class HomeStore {
-  HomeStore({
-    this.id,
-    this.isNew,
-    this.title,
-    this.subtitle,
-    this.picture,
-    this.isBuy,
-  });
+  int? _id;
+  bool? _isNew;
+  String? _title;
+  String? _subtitle;
+  String? _picture;
+  bool? _isBuy;
 
-  int? id;
-  bool? isNew;
-  String? title;
-  String? subtitle;
-  String? picture;
-  bool? isBuy;
+  HomeStore(
+      {int? id,
+      bool? isNew,
+      String? title,
+      String? subtitle,
+      String? picture,
+      bool? isBuy}) {
+    if (id != null) {
+      this._id = id;
+    }
+    if (isNew != null) {
+      this._isNew = isNew;
+    }
+    if (title != null) {
+      this._title = title;
+    }
+    if (subtitle != null) {
+      this._subtitle = subtitle;
+    }
+    if (picture != null) {
+      this._picture = picture;
+    }
+    if (isBuy != null) {
+      this._isBuy = isBuy;
+    }
+  }
 
-  factory HomeStore.fromJson(Map<String, dynamic> json) => HomeStore(
-        id: json["id"],
-        isNew: json["is_new"] == null ? null : json["is_new"],
-        title: json["title"],
-        subtitle: json["subtitle"],
-        picture: json["picture"],
-        isBuy: json["is_buy"],
-      );
+  int? get id => _id;
+  set id(int? id) => _id = id;
+  bool? get isNew => _isNew;
+  set isNew(bool? isNew) => _isNew = isNew;
+  String? get title => _title;
+  set title(String? title) => _title = title;
+  String? get subtitle => _subtitle;
+  set subtitle(String? subtitle) => _subtitle = subtitle;
+  String? get picture => _picture;
+  set picture(String? picture) => _picture = picture;
+  bool? get isBuy => _isBuy;
+  set isBuy(bool? isBuy) => _isBuy = isBuy;
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "is_new": isNew == null ? null : isNew,
-        "title": title,
-        "subtitle": subtitle,
-        "picture": picture,
-        "is_buy": isBuy,
-      };
+  HomeStore.fromJson(Map<String, dynamic> json) {
+    _id = json['id'];
+    _isNew = json['is_new'];
+    _title = json['title'];
+    _subtitle = json['subtitle'];
+    _picture = json['picture'];
+    _isBuy = json['is_buy'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this._id;
+    data['is_new'] = this._isNew;
+    data['title'] = this._title;
+    data['subtitle'] = this._subtitle;
+    data['picture'] = this._picture;
+    data['is_buy'] = this._isBuy;
+    return data;
+  }
 }
 
-final PhoneModel phoneModel = PhoneModel();
+class BestSeller {
+  int? _id;
+  bool? _isFavorites;
+  String? _title;
+  int? _priceWithoutDiscount;
+  int? _discountPrice;
+  String? _picture;
+
+  BestSeller(
+      {int? id,
+      bool? isFavorites,
+      String? title,
+      int? priceWithoutDiscount,
+      int? discountPrice,
+      String? picture}) {
+    if (id != null) {
+      this._id = id;
+    }
+    if (isFavorites != null) {
+      this._isFavorites = isFavorites;
+    }
+    if (title != null) {
+      this._title = title;
+    }
+    if (priceWithoutDiscount != null) {
+      this._priceWithoutDiscount = priceWithoutDiscount;
+    }
+    if (discountPrice != null) {
+      this._discountPrice = discountPrice;
+    }
+    if (picture != null) {
+      this._picture = picture;
+    }
+  }
+
+  int? get id => _id;
+  set id(int? id) => _id = id;
+  bool? get isFavorites => _isFavorites;
+  set isFavorites(bool? isFavorites) => _isFavorites = isFavorites;
+  String? get title => _title;
+  set title(String? title) => _title = title;
+  int? get priceWithoutDiscount => _priceWithoutDiscount;
+  set priceWithoutDiscount(int? priceWithoutDiscount) =>
+      _priceWithoutDiscount = priceWithoutDiscount;
+  int? get discountPrice => _discountPrice;
+  set discountPrice(int? discountPrice) => _discountPrice = discountPrice;
+  String? get picture => _picture;
+  set picture(String? picture) => _picture = picture;
+
+  BestSeller.fromJson(Map<String, dynamic> json) {
+    _id = json['id'];
+    _isFavorites = json['is_favorites'];
+    _title = json['title'];
+    _priceWithoutDiscount = json['price_without_discount'];
+    _discountPrice = json['discount_price'];
+    _picture = json['picture'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this._id;
+    data['is_favorites'] = this._isFavorites;
+    data['title'] = this._title;
+    data['price_without_discount'] = this._priceWithoutDiscount;
+    data['discount_price'] = this._discountPrice;
+    data['picture'] = this._picture;
+    return data;
+  }
+}

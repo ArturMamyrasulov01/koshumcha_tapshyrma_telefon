@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:koshumcha_tapshyrma_telefon/app/constants/app_colors/app_colors.dart';
@@ -115,48 +114,41 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(
                     height: 200,
-                    child: PageView(
-                      scrollDirection: Axis.horizontal,
-                      onPageChanged: (value) {},
-                      children: [
-                        FutureBuilder(
-                          future: ServicePhone.getPhone(),
-                          builder:
-                              (context, AsyncSnapshot<PhoneModel> snapshot) {
-                            if (snapshot.hasData) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            } else if (snapshot.hasError) {
-                              return const Center(
-                                child: Text("Error"),
-                              );
-                            } else {
-                              var data = snapshot.data!.bestSeller;
-                              return SizedBox(
-                                height: 190,
-                                child: ListView.builder(
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        color: AppColors.purple,
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                            data[index].picture.toString(),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  itemCount: data!.length,
+                    child: FutureBuilder(
+                      future: ServicePhone.getPhone(),
+                      builder: (context, AsyncSnapshot<PhoneModel> snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (snapshot.hasError) {
+                          return const Center(
+                            child: Text("Error"),
+                          );
+                        } else {
+                          var data = snapshot.data!.homeStore;
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                width: MediaQuery.of(context).size.width * 0.95,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: AppColors.purple,
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      data[index].picture.toString(),
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               );
-                            }
-                          },
-                        ),
-                      ],
+                            },
+                            itemCount: data!.length,
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],
