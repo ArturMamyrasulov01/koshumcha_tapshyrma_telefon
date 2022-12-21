@@ -56,105 +56,163 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       backgroundColor: AppColors.bgColor,
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            const TextRowWidget(
-              textLeft: AppTexts.selectCategory,
-              textRight: AppTexts.viewAll,
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(children: const [
-                CirculeColumnWidget(
-                  textStyle: AppTextStyles.buttonTextStyle,
-                  buttonColor: AppColors.brown,
-                  centerIcon: Icons.phone_iphone,
-                  bottomText: AppTexts.phones,
-                ),
-                CirculeColumnWidget(
-                  textStyle: AppTextStyles.categoryTextStyle,
-                  buttonColor: AppColors.white,
-                  centerIcon: Icons.computer,
-                  bottomText: AppTexts.computer,
-                ),
-                CirculeColumnWidget(
-                  textStyle: AppTextStyles.categoryTextStyle,
-                  buttonColor: AppColors.white,
-                  centerIcon: Icons.heart_broken_sharp,
-                  bottomText: AppTexts.health,
-                ),
-                CirculeColumnWidget(
-                  textStyle: AppTextStyles.categoryTextStyle,
-                  buttonColor: AppColors.white,
-                  centerIcon: Icons.book_rounded,
-                  bottomText: AppTexts.books,
-                ),
-                CirculeColumnWidget(
-                  textStyle: AppTextStyles.categoryTextStyle,
-                  buttonColor: AppColors.white,
-                  centerIcon: Icons.phone_iphone,
-                  bottomText: AppTexts.phones,
-                ),
-              ]),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 20,
+      body: SingleChildScrollView(
+        reverse: true,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              const TextRowWidget(
+                textLeft: AppTexts.selectCategory,
+                textRight: AppTexts.viewAll,
               ),
-              child: InputTextAndQrCodeWidget(),
-            ),
-            SizedBox(
-              child: Column(
-                children: [
-                  const TextRowWidget(
-                    textLeft: AppTexts.hotSales,
-                    textRight: AppTexts.seeMore,
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(children: const [
+                  CirculeColumnWidget(
+                    textStyle: AppTextStyles.buttonTextStyle,
+                    buttonColor: AppColors.brown,
+                    centerIcon: Icons.phone_iphone,
+                    bottomText: AppTexts.phones,
                   ),
-                  SizedBox(
-                    height: 200,
-                    child: FutureBuilder(
-                      future: ServicePhone.getPhone(),
-                      builder: (context, AsyncSnapshot<PhoneModel> snapshot) {
-                        if (!snapshot.hasData) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        } else if (snapshot.hasError) {
-                          return const Center(
-                            child: Text("Error"),
-                          );
-                        } else {
-                          var data = snapshot.data!.homeStore;
-                          return ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                width: MediaQuery.of(context).size.width * 0.95,
-                                height: 150,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  color: AppColors.purple,
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                      data[index].picture.toString(),
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
+                  CirculeColumnWidget(
+                    textStyle: AppTextStyles.categoryTextStyle,
+                    buttonColor: AppColors.white,
+                    centerIcon: Icons.computer,
+                    bottomText: AppTexts.computer,
+                  ),
+                  CirculeColumnWidget(
+                    textStyle: AppTextStyles.categoryTextStyle,
+                    buttonColor: AppColors.white,
+                    centerIcon: Icons.heart_broken_sharp,
+                    bottomText: AppTexts.health,
+                  ),
+                  CirculeColumnWidget(
+                    textStyle: AppTextStyles.categoryTextStyle,
+                    buttonColor: AppColors.white,
+                    centerIcon: Icons.book_rounded,
+                    bottomText: AppTexts.books,
+                  ),
+                  CirculeColumnWidget(
+                    textStyle: AppTextStyles.categoryTextStyle,
+                    buttonColor: AppColors.white,
+                    centerIcon: Icons.phone_iphone,
+                    bottomText: AppTexts.phones,
+                  ),
+                ]),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 20,
+                ),
+                child: InputTextAndQrCodeWidget(),
+              ),
+              const TextRowWidget(
+                textLeft: AppTexts.hotSales,
+                textRight: AppTexts.seeMore,
+              ),
+              SizedBox(
+                height: 200,
+                child: FutureBuilder(
+                  future: ServicePhone.getPhone(),
+                  builder: (context, AsyncSnapshot<PhoneModel> snapshot) {
+                    if (!snapshot.hasData) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasError) {
+                      return const Center(
+                        child: Text("Error"),
+                      );
+                    } else {
+                      var data = snapshot.data!.homeStore;
+                      return ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            alignment: Alignment.topLeft,
+                            width: MediaQuery.of(context).size.width * 0.95,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: AppColors.purple,
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  data[index].picture.toString(),
                                 ),
-                              );
-                            },
-                            itemCount: data!.length,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    data[index].title!,
+                                    style: AppTextStyles.namePhoneTextStyle,
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text(data[index].subtitle!),
+                                ],
+                              ),
+                            ),
                           );
-                        }
-                      },
-                    ),
-                  ),
-                ],
+                        },
+                        itemCount: data!.length,
+                      );
+                    }
+                  },
+                ),
               ),
-            ),
-          ],
+              const TextRowWidget(
+                textLeft: AppTexts.bestSeller,
+                textRight: AppTexts.seeMore,
+              ),
+              SizedBox(
+                  height: 200,
+                  child: FutureBuilder(
+                    future: ServicePhone.getPhone(),
+                    builder: (context, AsyncSnapshot<PhoneModel> snapshot) {
+                      if (!snapshot.hasData) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return const Center(
+                          child: Text("Error Service"),
+                        );
+                      } else {
+                        var data = snapshot.data!.bestSeller!;
+                        return GridView.builder(
+                          itemCount: data.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 250.0,
+                          ),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 100,
+                                decoration: BoxDecoration(
+                                    color: AppColors.brown,
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                        data[index].picture!,
+                                      ),
+                                    )),
+                              ),
+                            );
+                          },
+                        );
+                      }
+                    },
+                  ))
+            ],
+          ),
         ),
       ),
     );

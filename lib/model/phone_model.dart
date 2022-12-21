@@ -4,10 +4,10 @@ class PhoneModel {
 
   PhoneModel({List<HomeStore>? homeStore, List<BestSeller>? bestSeller}) {
     if (homeStore != null) {
-      this._homeStore = homeStore;
+      _homeStore = homeStore;
     }
     if (bestSeller != null) {
-      this._bestSeller = bestSeller;
+      _bestSeller = bestSeller;
     }
   }
 
@@ -20,19 +20,19 @@ class PhoneModel {
     if (json['home_store'] != null) {
       _homeStore = <HomeStore>[];
       json['home_store'].forEach((v) {
-        _homeStore!.add(new HomeStore.fromJson(v));
+        _homeStore!.add(HomeStore.fromJson(v));
       });
     }
     if (json['best_seller'] != null) {
       _bestSeller = <BestSeller>[];
       json['best_seller'].forEach((v) {
-        _bestSeller!.add(new BestSeller.fromJson(v));
+        _bestSeller!.add(BestSeller.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     if (this._homeStore != null) {
       data['home_store'] = this._homeStore!.map((v) => v.toJson()).toList();
     }

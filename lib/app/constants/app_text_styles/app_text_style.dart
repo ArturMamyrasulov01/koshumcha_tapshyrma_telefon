@@ -25,4 +25,10 @@ class AppTextStyles {
     color: Colors.grey,
     fontSize: 12.0,
   );
+  static const TextStyle namePhoneTextStyle = TextStyle(
+    fontFamily: "Roboto-Bold",
+    color: AppColors.white,
+    fontWeight: FontWeight.w700,
+    fontSize: 25.0,
+  );
 }
