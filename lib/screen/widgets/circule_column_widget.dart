@@ -6,8 +6,10 @@ class CirculeColumnWidget extends StatelessWidget {
   final String? bottomText;
   final Color? buttonColor;
   final TextStyle? textStyle;
+  final Size? size;
   const CirculeColumnWidget({
     super.key,
+    this.size,
     required this.textStyle,
     required this.buttonColor,
     required this.centerIcon,
@@ -19,7 +21,9 @@ class CirculeColumnWidget extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: size!.height * 0.02,
+          ),
           child: FloatingActionButton(
             elevation: 0.0,
             backgroundColor: buttonColor,
@@ -33,7 +37,7 @@ class CirculeColumnWidget extends StatelessWidget {
         ),
         Text(
           bottomText!,
-          style:textStyle,
+          style: textStyle,
         ),
       ],
     );

@@ -1,4 +1,7 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
+
 import 'package:koshumcha_tapshyrma_telefon/app/constants/app_texts/app_texts.dart';
 
 import '../../app/constants/app_colors/app_colors.dart';
@@ -40,7 +43,7 @@ class InputTextAndQrCodeWidget extends StatelessWidget {
           ),
         ),
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 14.0),
+          padding: EdgeInsets.symmetric(horizontal: 10.0),
           child: SizedBox(
             height: 40,
             child: CircleAvatar(
@@ -57,4 +60,3 @@ class InputTextAndQrCodeWidget extends StatelessWidget {
     );
   }
 }
-

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_getters_setters, prefer_collection_literals, duplicate_ignore
+
 class PhoneModel {
   List<HomeStore>? _homeStore;
   List<BestSeller>? _bestSeller;
@@ -13,6 +15,7 @@ class PhoneModel {
 
   List<HomeStore>? get homeStore => _homeStore;
   set homeStore(List<HomeStore>? homeStore) => _homeStore = homeStore;
+  // ignore: unnecessary_getters_setters
   List<BestSeller>? get bestSeller => _bestSeller;
   set bestSeller(List<BestSeller>? bestSeller) => _bestSeller = bestSeller;
 
@@ -33,11 +36,11 @@ class PhoneModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this._homeStore != null) {
-      data['home_store'] = this._homeStore!.map((v) => v.toJson()).toList();
+    if (_homeStore != null) {
+      data['home_store'] = _homeStore!.map((v) => v.toJson()).toList();
     }
-    if (this._bestSeller != null) {
-      data['best_seller'] = this._bestSeller!.map((v) => v.toJson()).toList();
+    if (_bestSeller != null) {
+      data['best_seller'] = _bestSeller!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -59,27 +62,29 @@ class HomeStore {
       String? picture,
       bool? isBuy}) {
     if (id != null) {
-      this._id = id;
+      _id = id;
     }
     if (isNew != null) {
-      this._isNew = isNew;
+      _isNew = isNew;
     }
     if (title != null) {
-      this._title = title;
+      _title = title;
     }
     if (subtitle != null) {
-      this._subtitle = subtitle;
+      _subtitle = subtitle;
     }
     if (picture != null) {
-      this._picture = picture;
+      _picture = picture;
     }
     if (isBuy != null) {
-      this._isBuy = isBuy;
+      _isBuy = isBuy;
     }
   }
 
+  // ignore: unnecessary_getters_setters
   int? get id => _id;
   set id(int? id) => _id = id;
+  // ignore: unnecessary_getters_setters
   bool? get isNew => _isNew;
   set isNew(bool? isNew) => _isNew = isNew;
   String? get title => _title;
@@ -101,13 +106,13 @@ class HomeStore {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this._id;
-    data['is_new'] = this._isNew;
-    data['title'] = this._title;
-    data['subtitle'] = this._subtitle;
-    data['picture'] = this._picture;
-    data['is_buy'] = this._isBuy;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = _id;
+    data['is_new'] = _isNew;
+    data['title'] = _title;
+    data['subtitle'] = _subtitle;
+    data['picture'] = _picture;
+    data['is_buy'] = _isBuy;
     return data;
   }
 }
@@ -128,22 +133,22 @@ class BestSeller {
       int? discountPrice,
       String? picture}) {
     if (id != null) {
-      this._id = id;
+      _id = id;
     }
     if (isFavorites != null) {
-      this._isFavorites = isFavorites;
+      _isFavorites = isFavorites;
     }
     if (title != null) {
-      this._title = title;
+      _title = title;
     }
     if (priceWithoutDiscount != null) {
-      this._priceWithoutDiscount = priceWithoutDiscount;
+      _priceWithoutDiscount = priceWithoutDiscount;
     }
     if (discountPrice != null) {
-      this._discountPrice = discountPrice;
+      _discountPrice = discountPrice;
     }
     if (picture != null) {
-      this._picture = picture;
+      _picture = picture;
     }
   }
 
@@ -171,13 +176,13 @@ class BestSeller {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this._id;
-    data['is_favorites'] = this._isFavorites;
-    data['title'] = this._title;
-    data['price_without_discount'] = this._priceWithoutDiscount;
-    data['discount_price'] = this._discountPrice;
-    data['picture'] = this._picture;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = _id;
+    data['is_favorites'] = _isFavorites;
+    data['title'] = _title;
+    data['price_without_discount'] = _priceWithoutDiscount;
+    data['discount_price'] = _discountPrice;
+    data['picture'] = _picture;
     return data;
   }
 }
