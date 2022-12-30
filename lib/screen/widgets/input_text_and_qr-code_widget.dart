@@ -38,7 +38,6 @@ class InputTextAndQrCodeWidget extends StatelessWidget {
                   color: AppColors.brown,
                 ),
               ),
-              textAlign: TextAlign.justify,
             ),
           ),
         ),
