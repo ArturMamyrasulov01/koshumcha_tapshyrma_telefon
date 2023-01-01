@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:koshumcha_tapshyrma_telefon/app/constants/app_colors/app_colors.dart';
 import 'package:koshumcha_tapshyrma_telefon/screen/widgets/sliver_grid_widget.dart';
 import 'package:koshumcha_tapshyrma_telefon/screen/widgets/title_row_widget.dart';
@@ -16,6 +17,31 @@ class HomePage extends StatefulWidget {
 }
 
 final PageController controller = PageController();
+
+Future<Position> _determinePosition() async {
+  bool serviceEnabled;
+  LocationPermission permission;
+
+  serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+    return Future.error('Location services are disabled.');
+  }
+
+  permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      return Future.error('Location permissions are denied');
+    }
+  }
+
+  if (permission == LocationPermission.deniedForever) {
+    return Future.error(
+        'Location permissions are permanently denied, we cannot request permissions.');
+  }
+
+  return await Geolocator.getCurrentPosition();
+}
 
 class _HomePageState extends State<HomePage> {
   @override
@@ -60,7 +86,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  SliverGridWidget(data: data.bestSeller!)
+                  SliverGridWidget(
+                    data: data.bestSeller!,
+                  )
                 ],
               );
             }

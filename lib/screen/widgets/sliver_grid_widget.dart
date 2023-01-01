@@ -1,6 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../app/constants/app_colors/app_colors.dart';
 import '../../model/phone_model.dart';
 import '../../service/phone_service.dart';
 
@@ -23,18 +23,29 @@ class SliverGridWidget extends StatelessWidget {
           return FutureBuilder(
             future: ServicePhone.getPhone(),
             builder: (context, AsyncSnapshot<PhoneModel> snapshot) {
-              return Container(
-                margin: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: AppColors.brown,
-                  borderRadius: BorderRadius.circular(20.0),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                      data[index].picture!,
+              return CachedNetworkImage(
+                imageUrl: data[index].picture!,
+                imageBuilder: (context, imageProvider) => Container(
+                  alignment: Alignment.bottomCenter,
+                  margin: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                        colorFilter: const ColorFilter.mode(
+                            Colors.transparent, BlendMode.colorBurn)),
+                  ),
+                  child: Chip(
+                    label: Text(
+                      data[index].title!,
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               );
             },
           );

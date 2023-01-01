@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../app/constants/app_texts/app_texts.dart';
@@ -34,11 +35,9 @@ class PageViewImageWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                        data![index].picture!,
-                      ),
-                    ),
+                        fit: BoxFit.cover,
+                        image:
+                            CachedNetworkImageProvider(data![index].picture!)),
                   ),
                 );
               },
