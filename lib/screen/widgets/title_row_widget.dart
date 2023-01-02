@@ -1,12 +1,12 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../app/constants/app_colors/app_colors.dart';
 
 class TitleRowWidget extends StatelessWidget {
+  final void Function() onClic;
   const TitleRowWidget({
+    required this.onClic,
     Key? key,
   }) : super(key: key);
 
@@ -16,7 +16,7 @@ class TitleRowWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
-          onPressed: () {},
+          onPressed: onClic,
           icon: const Icon(
             Icons.location_on_outlined,
             color: AppColors.brown,
