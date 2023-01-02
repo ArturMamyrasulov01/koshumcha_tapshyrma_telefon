@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:koshumcha_tapshyrma_telefon/app/constants/app_colors/app_colors.dart';
 import 'package:koshumcha_tapshyrma_telefon/screen/widgets/sliver_grid_widget.dart';
 import 'package:koshumcha_tapshyrma_telefon/screen/widgets/title_row_widget.dart';
@@ -34,9 +33,13 @@ class _HomePageState extends State<HomePage> {
           future: ServicePhone.getPhone(),
           builder: (context, AsyncSnapshot<PhoneModel> snapshot) {
             if (!snapshot.hasData) {
-              return const Center(
+              return Center(
                 child: SizedBox(
-                  child: CircularProgressIndicator(),
+                  height: size.height * 0.07,
+                  width: size.width * 0.15,
+                  child: CircularProgressIndicator(
+                    strokeWidth: size.height * 0.02,
+                  ),
                 ),
               );
             } else if (snapshot.hasError) {

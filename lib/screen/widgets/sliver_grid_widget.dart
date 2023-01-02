@@ -23,29 +23,19 @@ class SliverGridWidget extends StatelessWidget {
           return FutureBuilder(
             future: ServicePhone.getPhone(),
             builder: (context, AsyncSnapshot<PhoneModel> snapshot) {
-              return CachedNetworkImage(
-                imageUrl: data[index].picture!,
-                imageBuilder: (context, imageProvider) => Container(
-                  alignment: Alignment.bottomCenter,
-                  margin: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
-                        colorFilter: const ColorFilter.mode(
-                            Colors.transparent, BlendMode.colorBurn)),
-                  ),
-                  child: Chip(
-                    label: Text(
-                      data[index].title!,
-                      textAlign: TextAlign.center,
-                    ),
+              return Container(
+                alignment: Alignment.bottomCenter,
+                margin: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: CachedNetworkImageProvider(data[index].picture!),
                   ),
                 ),
-                placeholder: (context, url) =>
-                    const CircularProgressIndicator(),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+                child: Chip(
+                  label: Text(data[index].title!),
+                ),
               );
             },
           );
