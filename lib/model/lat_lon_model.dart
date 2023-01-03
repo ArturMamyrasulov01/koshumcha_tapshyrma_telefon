@@ -109,8 +109,7 @@ class ModelLatLon {
     _main = json['main'] != null ? Main.fromJson(json['main']) : null;
     _visibility = json['visibility'];
     _wind = json['wind'] != null ? Wind.fromJson(json['wind']) : null;
-    _clouds =
-        json['clouds'] != null ? Clouds.fromJson(json['clouds']) : null;
+    _clouds = json['clouds'] != null ? Clouds.fromJson(json['clouds']) : null;
     _dt = json['dt'];
     _sys = json['sys'] != null ? Sys.fromJson(json['sys']) : null;
     _timezone = json['timezone'];
@@ -229,7 +228,7 @@ class Weather {
 }
 
 class Main {
-  double? _temp;
+  num? _temp;
   double? _feelsLike;
   double? _tempMin;
   double? _tempMax;
@@ -263,8 +262,8 @@ class Main {
     }
   }
 
-  double? get temp => _temp;
-  set temp(double? temp) => _temp = temp;
+  num? get temp => _temp;
+  set temp(num? temp) => _temp = temp;
   double? get feelsLike => _feelsLike;
   set feelsLike(double? feelsLike) => _feelsLike = feelsLike;
   double? get tempMin => _tempMin;

@@ -31,10 +31,10 @@ class _HomePageState extends State<HomePage> {
       ),
     );
     final position = await GeoLocator.getPosition();
-    ServiceLatLon.getLatLon(
+    ServiceLatLon(
       lat: position.latitude,
       lon: position.longitude,
-    );
+    ).getLatLon();
     showLatLon();
     setState(() {});
   }
@@ -69,6 +69,7 @@ class _HomePageState extends State<HomePage> {
               );
             } else {
               var data = snapshot.data!;
+
               return CustomScrollView(
                 primary: true,
                 shrinkWrap: true,

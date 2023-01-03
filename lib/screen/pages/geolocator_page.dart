@@ -10,7 +10,7 @@ class GeoLocatorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: ServiceLatLon.getLatLon(),
+      future: ServiceLatLon().getLatLon(),
       builder: (context, AsyncSnapshot<ModelLatLon> snapshot) {
         if (!snapshot.hasData) {
           return const Center(
@@ -36,6 +36,10 @@ class GeoLocatorPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Text(
+                    data.sys!.country!,
+                    style: AppTextStyles.mainTextStyle,
+                  ),
                   Text(
                     "Lat==> ${data.coord!.lat}",
                     style: AppTextStyles.mainTextStyle,
