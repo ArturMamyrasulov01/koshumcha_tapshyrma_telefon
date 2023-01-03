@@ -31,50 +31,48 @@ class SingleButtonWidget extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Padding(
-              padding:
-                  EdgeInsets.all(size.height * 0.01),
+              padding: EdgeInsets.all(size.height * 0.01),
               child: Row(
                 children: [
                   CirculeColumnWidget(
+                    heroTag: "1",
                     size: size,
-                    textStyle:
-                        AppTextStyles.buttonTextStyle,
+                    textStyle: AppTextStyles.buttonTextStyle,
                     buttonColor: AppColors.brown,
                     centerIcon: Icons.phone_iphone,
                     bottomText: AppTexts.phones,
                   ),
                   CirculeColumnWidget(
                     size: size,
-                    textStyle:
-                        AppTextStyles.categoryTextStyle,
+                    textStyle: AppTextStyles.categoryTextStyle,
                     buttonColor: AppColors.white,
                     centerIcon: Icons.computer,
                     bottomText: AppTexts.computer,
+                    heroTag: '2',
                   ),
                   CirculeColumnWidget(
+                    heroTag: "3",
                     size: size,
-                    textStyle:
-                        AppTextStyles.categoryTextStyle,
+                    textStyle: AppTextStyles.categoryTextStyle,
                     buttonColor: AppColors.white,
-                    centerIcon:
-                        Icons.heart_broken_sharp,
+                    centerIcon: Icons.heart_broken_sharp,
                     bottomText: AppTexts.health,
                   ),
                   CirculeColumnWidget(
                     size: size,
-                    textStyle:
-                        AppTextStyles.categoryTextStyle,
+                    textStyle: AppTextStyles.categoryTextStyle,
                     buttonColor: AppColors.white,
                     centerIcon: Icons.book_rounded,
                     bottomText: AppTexts.books,
+                    heroTag: "4",
                   ),
                   CirculeColumnWidget(
                     size: size,
-                    textStyle:
-                        AppTextStyles.categoryTextStyle,
+                    textStyle: AppTextStyles.categoryTextStyle,
                     buttonColor: AppColors.white,
                     centerIcon: Icons.phone_iphone,
                     bottomText: AppTexts.phones,
+                    heroTag: "5",
                   ),
                 ],
               ),

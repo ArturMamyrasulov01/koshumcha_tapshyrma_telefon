@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:koshumcha_tapshyrma_telefon/app/constants/app_colors/app_colors.dart';
+import 'package:koshumcha_tapshyrma_telefon/screen/pages/geolocator_page.dart';
 import 'package:koshumcha_tapshyrma_telefon/screen/widgets/sliver_grid_widget.dart';
 import 'package:koshumcha_tapshyrma_telefon/screen/widgets/title_row_widget.dart';
+import 'package:koshumcha_tapshyrma_telefon/service/lat_lon_service.dart';
 import 'package:koshumcha_tapshyrma_telefon/utils/geo_locator/geo_locator.dart';
 
 import '../../model/phone_model.dart';
@@ -19,9 +23,26 @@ class HomePage extends StatefulWidget {
 final PageController controller = PageController();
 
 class _HomePageState extends State<HomePage> {
-  void getGeoLocator() {
-    GeoLocator.getPosition();
+  void getGeoLocator() async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const GeoLocatorPage(),
+      ),
+    );
+    final position = await GeoLocator.getPosition();
+    ServiceLatLon.getLatLon(
+      lat: position.latitude,
+      lon: position.longitude,
+    );
+    showLatLon();
     setState(() {});
+  }
+
+  Future<void> showLatLon() async {
+    final position = await GeoLocator.getPosition();
+    log(position.latitude.toString());
+    log(position.longitude.toString());
   }
 
   @override

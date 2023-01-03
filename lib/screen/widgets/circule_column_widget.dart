@@ -7,9 +7,11 @@ class CirculeColumnWidget extends StatelessWidget {
   final Color? buttonColor;
   final TextStyle? textStyle;
   final Size? size;
+  final String? heroTag;
   const CirculeColumnWidget({
     super.key,
     this.size,
+    required this.heroTag,
     required this.textStyle,
     required this.buttonColor,
     required this.centerIcon,
@@ -25,6 +27,7 @@ class CirculeColumnWidget extends StatelessWidget {
             horizontal: size!.height * 0.02,
           ),
           child: FloatingActionButton(
+            heroTag: heroTag,
             elevation: 0.0,
             backgroundColor: buttonColor,
             onPressed: () {},
