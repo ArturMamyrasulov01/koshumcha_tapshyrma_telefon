@@ -37,7 +37,7 @@ class GeoLocatorPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    data.sys!.country!,
+                    "County==>${data.sys!.country!}",
                     style: AppTextStyles.mainTextStyle,
                   ),
                   Text(

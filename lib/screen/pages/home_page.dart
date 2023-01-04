@@ -32,8 +32,8 @@ class _HomePageState extends State<HomePage> {
     );
     final position = await GeoLocator.getPosition();
     ServiceLatLon(
-      lat: position.latitude,
-      lon: position.longitude,
+      lat: position.latitude.toString(),
+      lon: position.longitude.toString(),
     ).getLatLon();
     showLatLon();
     setState(() {});
@@ -41,8 +41,8 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> showLatLon() async {
     final position = await GeoLocator.getPosition();
-    log(position.latitude.toString());
-    log(position.longitude.toString());
+    log("lat==>${position.latitude}");
+    log('lon==>${position.longitude}');
   }
 
   @override
@@ -56,8 +56,8 @@ class _HomePageState extends State<HomePage> {
             if (!snapshot.hasData) {
               return Center(
                 child: SizedBox(
-                  height: size.height * 0.07,
-                  width: size.width * 0.15,
+                  height: 100,
+                  width: 100,
                   child: CircularProgressIndicator(
                     strokeWidth: size.height * 0.02,
                   ),
